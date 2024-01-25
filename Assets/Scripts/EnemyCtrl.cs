@@ -18,20 +18,39 @@ public class EnemyCtrl : MonoBehaviour
 
     private Transform playerTransform;
 
+    private GameManager gameManager;
+
+
     private void Start()
     {
-        playerTransform = GameManager.instance.PlayerCtrl.playerTransform;
+        gameManager = GameManager.instance;
+        playerTransform = gameManager.PlayerCtrl.playerTransform;
     }
 
     private void Update()
     {
-        Debug.Log("calling");
-        this.transform.LookAt(playerTransform);
-
-        this.transform.Translate(0f, 0f, Time.deltaTime * forwardSpeed);
-        if(Health <= 0)
+        if (!gameManager.isGameOver)
         {
-            Destroy(this.gameObject);
+            this.transform.LookAt(playerTransform);
+
+            this.transform.Translate(0f, 0f, Time.deltaTime * forwardSpeed);
+            if (Health <= 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Bullet")
+        {
+            EnemyDeath();
+        }
+    }
+
+    private void EnemyDeath()
+    {
+        Destroy(gameObject);
     }
 }

@@ -31,6 +31,10 @@ public class EnemySpawner : MonoBehaviour
 
             EnemyCtrl spawnEnemy = Instantiate(enemiesToSpawnWithIndexAsLevel[indexOfEnemyToSpawn], transform.position, transform.rotation, transform);
         }
+        if (gameManager.isGameOver)
+        {
+            StopCoroutine("SpawnEnemy");
+        }
 
     }
 }

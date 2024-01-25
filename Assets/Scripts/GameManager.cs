@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour
         get => _maxLevel;
     }
 
+    [SerializeField]
+    private LettersManager lettersManager;
+
+    public LettersManager LettersManagerCtrl
+    {
+        get => lettersManager;
+    }
+
     public bool isGameOver = false;
 
     // Start is called before the first frame update
@@ -39,5 +47,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _playerCtrl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCtrl>();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
