@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,18 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    [Serializable]
+    public struct Portals
+    {
+        public GameObject portalLv1;
+        public GameObject portalLv2;
+        public GameObject portalLv3;
+
+    }
+
+    [SerializeField]
+    private Portals portals;
 
     private PlayerCtrl _playerCtrl;
     public PlayerCtrl PlayerCtrl
@@ -18,7 +31,7 @@ public class GameManager : MonoBehaviour
         get => _currentLevel;
     }
 
-    private int _maxLevel = 4;
+    private int _maxLevel = 3;
     public int MaxLevel
     {
         get => _maxLevel;
@@ -59,4 +72,21 @@ public class GameManager : MonoBehaviour
             Cursor.visible = true;
         }
     }
+
+    public void LevelUp()
+    {
+        if (_currentLevel < MaxLevel)
+        {
+            _currentLevel++;
+        }
+        if (_currentLevel == 2)
+        {
+            portals.portalLv2.SetActive(true);
+        }
+        else if(_currentLevel == 3)
+        {
+            portals.portalLv3.SetActive(true);
+        }
+    }
+
 }

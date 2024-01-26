@@ -24,8 +24,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while (!gameManager.isGameOver)
         {
-            float spawnTimer = gameManager.MaxLevel - gameManager.CurrentLevel;
-            yield return new WaitForSeconds(Random.Range(spawnTimer, 2 *spawnTimer));
+            yield return new WaitForSeconds(Random.Range(4f, 8f));
 
             int indexOfEnemyToSpawn = Random.Range(0, gameManager.CurrentLevel);
 

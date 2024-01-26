@@ -46,6 +46,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         if (other.gameObject.tag == "Letter")
         {
+            gameManager.LevelUp();
             gameManager.LettersManagerCtrl.CollectLetter();
         }
     }

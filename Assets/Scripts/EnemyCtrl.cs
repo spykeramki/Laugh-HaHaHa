@@ -9,11 +9,11 @@ public class EnemyCtrl : MonoBehaviour
 
     private float forwardSpeed = 5f;
 
-    private float basicHealth = 100f;
+    private float health;
 
     public float Health
     {
-        get => basicHealth * (level/2);
+        get => health;
     }
 
     private Transform playerTransform;
@@ -25,6 +25,7 @@ public class EnemyCtrl : MonoBehaviour
     {
         gameManager = GameManager.instance;
         playerTransform = gameManager.PlayerCtrl.playerTransform;
+        health = 100 * (level / 2);
     }
 
     private void Update()
@@ -45,12 +46,17 @@ public class EnemyCtrl : MonoBehaviour
     {
         if(other.tag == "Bullet")
         {
-            EnemyDeath();
+            float healthReduce = 50f;
+            EnemyDeath(healthReduce);
         }
     }
 
-    private void EnemyDeath()
+    private void EnemyDeath(float healthReduce)
     {
-        Destroy(gameObject);
+        health -= healthReduce;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

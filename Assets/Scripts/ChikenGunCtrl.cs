@@ -13,7 +13,9 @@ public class ChikenGunCtrl : WeaponCtrl
     {
         base.Fire();
         GameObject bullet = Instantiate(ammo, spawnPoint.position, spawnPoint.rotation);
-        bullet.GetComponent<Rigidbody>().AddForce(spawnPoint.forward * bulletSpeed, ForceMode.Impulse);
+        BulletCtrl bulletCtrl = bullet.GetComponent<BulletCtrl>();
+        bulletCtrl.Rb.AddForce(spawnPoint.forward * bulletSpeed, ForceMode.Impulse);
+        bulletCtrl.PlayChickenFlyAnimation(true);
     }
 
 }
