@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,6 +45,9 @@ public class GameManager : MonoBehaviour
     {
         get => lettersManager;
     }
+
+    [SerializeField]
+    private GameOverCtrl gameOverCtrl;
 
     public bool isGameOver = false;
 
@@ -88,5 +92,28 @@ public class GameManager : MonoBehaviour
             portals.portalLv3.SetActive(true);
         }
     }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadSceneAsync("01Main");
+    }
+
+    public void GoToHome()
+    {
+        SceneManager.LoadSceneAsync("00Start");
+    }
+
+    public void GameOver()
+    {
+        isGameOver = true;
+        gameOverCtrl.DisplayEndOfTheGame(!isGameOver);
+    }
+
+    public void WonGame()
+    {
+        isGameOver = true;
+        gameOverCtrl.DisplayEndOfTheGame(isGameOver);
+    }
+
 
 }

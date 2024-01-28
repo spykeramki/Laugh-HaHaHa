@@ -42,7 +42,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            gameManager.isGameOver = true;
+            gameManager.GameOver();
         }
         if (other.gameObject.tag == "Letter")
         {

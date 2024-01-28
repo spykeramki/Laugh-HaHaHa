@@ -79,7 +79,7 @@ public class LettersManager : MonoBehaviour
         }
         else
         {
-            //call win the game to shout
+            GameManager.instance.WonGame();
         }
     }
 
